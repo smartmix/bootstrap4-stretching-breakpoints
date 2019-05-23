@@ -1,0 +1,39 @@
+$stretching-breakpoints: (
+  //sm,
+  md,
+  lg,
+  xl,
+  xxl,
+);
+
+
+
+.container-stretch-left, .container-stretch-right{
+    @extend .container;
+}
+
+
+
+@each $breakpoint, $value in $stretching-breakpoints{
+            
+    @include media-breakpoint-up($breakpoint){
+
+        $max-width: map-get($container-max-widths,$breakpoint) + 0px;
+
+        .container-stretch-right {
+            max-width: ($container-width+((100 - $container-width)/2)) + 0%;
+            $margin: ((100 - $container-width)/2) + 0%;
+            margin-left: calc((100% - #{$max-width})/2);
+            width: calc(   #{$max-width} + ((100% - #{$max-width})/2)  );
+        }
+
+        .container-stretch-left {
+            max-width: ($container-width+((100 - $container-width)/2)) + 0%;
+            $margin: ((100 - $container-width)/2) + 0%;
+            width: calc(   #{$max-width} + ((100% - #{$max-width})/2)  );
+            margin: 0;
+        }
+
+    }
+    
+}
